@@ -8,66 +8,114 @@ function isWhiteSpaceOrEmpty(str) {
 
 function validate(form) {
 
-    if (!checkString(form.elements["f_imie"].value, "Wprowadź Imię")) {
-        return false
+    let flag = true;
+    if (!checkStringAndFocus(form.elements["f_imie"], "Wprowadź imię", isStringIncorrect)) {
+        flag = false
     }
 
-    if (!checkString(form.f_nazwisko.value, "Wprowadź Nazwisko")) {
-        return false
+    if (!checkStringAndFocus(form.f_nazwisko, "Wprowadź nazwisko", isStringIncorrect)) {
+        flag =  false
     }
 
-    if (!checkString(form.f_nazwisko_p.value, "Wprowadź Nazwisko Panieńskie")) {
-        return false
+    if(document.getElementById("NazwiskoPanienskie").style.visibility==="visible" || !(document.getElementById("NazwiskoPanienskie").style.visibility==="hidden") ){
+        if (!checkStringAndFocus(form.f_nazwisko_p, "Wprowadź nazwisko panieńskie", isStringIncorrect)) {
+            flag = false
+        }
     }
-
-
-    if (!checkString(form.f_kod.value, "wprowadź kod")) {
-        return false
-    }
-
-    if (!checkString(form.f_ulica.value, "Wprowadź Ulice")) {
-        return false
-    }
-
-    if (!checkString(form.f_miasto.value, "Wprowadź Miasto")) {
-        return false
-    }
-    if(!checkEmail(form.f_email.value))
+    else
     {
-        return false
+        document.getElementById("e_nazwisko_p").innerHTML ="";
     }
 
-    return true
-}
-
-function checkString(string, errorMsg) {
-    if (isWhiteSpaceOrEmpty(string)) {
-        alert(errorMsg);
-        return false
+    if (!checkStringAndFocus(form.f_kod, "Wprowadź kod", isStringIncorrect)) {
+        flag =  false
     }
-    return true
+
+    if (!checkStringAndFocus(form.f_ulica, "Wprowadź ulicę", isStringIncorrect)) {
+        flag =  false
+    }
+
+    if (!checkStringAndFocus(form.f_miasto, "Wprowadź miasto", isStringIncorrect)) {
+        flag =  false
+    }
+    if (!checkStringAndFocus(form.f_email, "Podaj właściwy email", isEmailIncorrect)) {
+        flag =  false
+    }
+
+    alterRows(1,document.getElementsByTagName('tr').item(0));
+
+
+    return flag
 }
 
-function checkEmail(str) {
+function isStringIncorrect(string) {
+    return isWhiteSpaceOrEmpty(string);
+
+}
+
+function isEmailIncorrect(str) {
     let email = /^[a-zA-Z_0-9.]+@[a-zA-Z_0-9.]+\.[a-zA-Z][a-zA-Z]+$/;
-    if (email.test(str))
-        return true;
-    else {
-        alert("Podaj właściwy e-mail");
-        return false;
-    }
+    return !email.test(str);
 }
 
-function checkStringAndFocus(obj, msg) {
+function checkStringAndFocus(obj, msg, val_fun) {
     let str = obj.value;
     let errorFieldName = "e_" + obj.name.substr(2, obj.name.length);
-    if (isWhiteSpaceOrEmpty(str)) {
+    if (val_fun(str)) {
         document.getElementById(errorFieldName).innerHTML = msg;
         obj.focus();
         return false;
-    }
-    else {
+    } else {
+        document.getElementById(errorFieldName).innerHTML ="";
         return true;
     }
+}
+
+function nextNode(e) {
+    while (e && e.nodeType != 1) {
+        e = e.nextSibling;
+    }
+    return e;
+}
+function prevNode(e) {
+    while (e && e.nodeType != 1) {
+        e = e.previousSibling;
+    }
+    return e;
+}
+function swapRows(b) {
+    let tab = prevNode(b.previousSibling);
+    let tBody = nextNode(tab.firstChild);
+    let lastNode = prevNode(tBody.lastChild);
+    tBody.removeChild(lastNode);
+    let firstNode = nextNode(tBody.firstChild);
+    tBody.insertBefore(lastNode, firstNode);
+}
+
+function showElement(e) {
+    document.getElementById(e).style.visibility = 'visible';
+}
+function hideElement(e) {
+    document.getElementById(e).style.visibility = 'hidden';
+}
+
+function alterRows(i, e) {
+    if (e) {
+        if (i % 2 == 1) {
+            e.setAttribute("style", "background-color: Aqua;");
+        }
+        e = e.nextSibling;
+        while (e && e.nodeType != 1) {
+            e = e.nextSibling;
+        }
+        alterRows(++i, e);
+    }
+}
+
+function cnt(form, msg, maxSize) {
+    if (form.value.length > maxSize)
+        form.value = form.value.substring(0, maxSize);
+    else
+        msg.innerHTML = maxSize - form.value.length;
 }
 
