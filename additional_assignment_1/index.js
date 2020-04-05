@@ -1,5 +1,4 @@
 const rp = require('request-promise');
-const axios = require('axios');
 const $ = require('cheerio');
 const url = 'https://www.morele.net/komputery/podzespoly-komputerowe/dyski-hdd-4/';
 const baseUrl = 'https://www.morele.net'
