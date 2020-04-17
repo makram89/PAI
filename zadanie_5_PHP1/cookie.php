@@ -12,9 +12,7 @@ echo "Zalogowano";
 ?>
 
 <?php
-if (isset($_GET["utworzCookie"])) {
-    header("Location: cookie.php");
-}
+
 
 setcookie("ciasteczkowy", "casteczkol_orzechowe", time() + (86400 * 30), "/");
 ?>

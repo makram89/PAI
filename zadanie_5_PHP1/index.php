@@ -23,11 +23,15 @@ if (isset($_POST["wyloguj"])) {
     $_SESSION["zalogowany"] = 0;
 }
 ?>
-<form method="" action="cookie.php">
+<form method="get" action="cookie.php">
     Time: <input type="number" name="czas"><br>
     <label for="utworzCookie">Button to create cookie</label>
     <input type="submit" name="utworzCookie" value="cookie_plus">
 </form>
-
+<?php
+if (isset($_GET["utworzCookie"])) {
+    header("Location: cookie.php");
+}
+?>
 </body>
 </html>
