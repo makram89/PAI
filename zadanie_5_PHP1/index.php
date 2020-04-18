@@ -33,5 +33,11 @@ if (isset($_GET["utworzCookie"])) {
     header("Location: cookie.php");
 }
 ?>
+<?php
+if (isset($_COOKIE["ciasto"])) {
+    echo "<br>Cookie value:" . $_COOKIE["ciasto"] . "<br>";
+}
+?>
+
 </body>
 </html>

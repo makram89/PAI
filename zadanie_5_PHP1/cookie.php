@@ -12,9 +12,12 @@ echo "Zalogowano";
 ?>
 
 <?php
+if(isset($_GET["czas"]))
+{
+    setcookie("ciasto", "custum_cookie",  time()+5, "/");
+    echo "<br>Czas cookie:". $_COOKIE["ciasto"];
+}
 
-
-setcookie("ciasteczkowy", "casteczkol_orzechowe", time() + (86400 * 30), "/");
 ?>
 
 <a href="index.php">wroc do index</a><br>
