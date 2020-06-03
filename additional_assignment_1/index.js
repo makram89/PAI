@@ -1,7 +1,7 @@
 const rp = require('request-promise');
 const $ = require('cheerio');
-// const url = 'https://www.morele.net/komputery/podzespoly-komputerowe/dyski-hdd-4/';
-const url = 'https://www.morele.net/komputery/dyski-i-nosniki-danych/dyski-zewnetrzne-207/';
+const url = 'https://www.morele.net/komputery/podzespoly-komputerowe/dyski-hdd-4/';
+// const url = 'https://www.morele.net/komputery/dyski-i-nosniki-danych/dyski-zewnetrzne-207/';
 const baseUrl = 'https://www.morele.net'
 
 
