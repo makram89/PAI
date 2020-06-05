@@ -11,7 +11,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            todos: todosData,
+            todos: [],
             filter : false,
             todoText : ""
         }
@@ -24,11 +24,11 @@ class App extends React.Component {
     handleAdd(event){
         event.preventDefault()
         if(this.state.todoText.trim().length !==0) {
-            const id = this.state.todos[this.state.todos.length - 1].id + 1
-            let localTodos = this.state.todos
+            const id = this.state.todos.length +1
+            let updatedTodos = this.state.todos
             const todo = {"id": id, "text": this.state.todoText, "done": false}
-            localTodos.push(todo)
-            this.setState({todoText : "", todos : localTodos})
+            updatedTodos.push(todo)
+            this.setState({todoText : "", todos : updatedTodos})
         }
 
     }
