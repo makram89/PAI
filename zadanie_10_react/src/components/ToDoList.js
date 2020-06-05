@@ -1,22 +1,15 @@
 import React from "react"
 
-function ToDoList() {
 
-    return (
-        <div>
-            <input type="checkbox" />
-            <p>Placeholder text here</p>
+class ToDoList extends React.Component {
 
-            <input type="checkbox" />
-            <p>Placeholder text here</p>
-
-            <input type="checkbox" />
-            <p>Placeholder text here</p>
-
-            <input type="checkbox" />
-            <p>Placeholder text here</p>
-        </div>
-    )
+    render() {
+        return (
+            <div className="todo-list" >
+                {this.props.items}
+            </div>
+        )
+    }
 }
 
 export default ToDoList
