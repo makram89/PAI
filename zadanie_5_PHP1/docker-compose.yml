@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  php:
+    container_name: php-1-app
+    image: makram89/php_1_app:latest
+    ports:
+      - "3001:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public

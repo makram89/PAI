@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: react_app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:3000" # Map port 
+    volumes:
+      - /app/node_modules # Use a named volume for node_modules to avoid overriding the installed ones with host's node_modules
+    command: npm start 
